@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeed9a7088594d2098bddbf612d72656, type: 3}
   m_Name: RoomSettings
   m_EditorClassIdentifier: 
-  gridSize: {x: 3, y: 3}
-  cellPrefab: {fileID: 9133843052005462424, guid: 00e24cb7b636a1d42adec60e5560c3f2, type: 3}
+  startPos: {x: 0, y: 0}
+  iterations: 60
+  iterationWalkCount: 30
+  iterationFromRandomPos: 0
+  cellPrefab: {fileID: 6002702982394233044, guid: 00e24cb7b636a1d42adec60e5560c3f2, type: 3}

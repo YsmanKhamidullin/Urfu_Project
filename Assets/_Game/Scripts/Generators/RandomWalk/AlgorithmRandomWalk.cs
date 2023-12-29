@@ -5,19 +5,40 @@ namespace Algorithms
 {
     public static class AlgorithmRandomWalk
     {
-        public static HashSet<Vector2Int> GeneratePath(Vector2Int startPos, int pathLenght)
+        public static HashSet<Vector2Int> GeneratePath(Vector2Int startPos, int pathLength, float maxDistance)
         {
             var path = new HashSet<Vector2Int> { startPos };
 
             var prevPos = startPos;
-            for (var i = 0; i < pathLenght; i++)
+            for (var i = 0; i < pathLength; i++)
             {
-                var newPos = prevPos + Direction2D.GetRandom();
-                path.Add(newPos);
+                var randomDir = Direction2D.GetRandom();
+                var newPos = prevPos + randomDir;
+                if (TryCheckDistance(startPos, newPos, maxDistance))
+                {
+                    path.Add(newPos);
+                }
+                else
+                {
+                    newPos = prevPos - randomDir;
+                    path.Add(newPos);
+                }
+
                 prevPos = newPos;
             }
 
             return path;
+        }
+
+        private static bool TryCheckDistance(Vector2Int startPos, Vector2Int newPos, float maxDistance)
+        {
+            if (maxDistance == 0)
+            {
+                return true;
+            }
+
+            var distance = Vector2Int.Distance(newPos, startPos);
+            return distance <= maxDistance;
         }
     }
 

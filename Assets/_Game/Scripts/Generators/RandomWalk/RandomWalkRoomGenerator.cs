@@ -3,6 +3,7 @@ using System.Linq;
 using Algorithms;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Generators
@@ -14,6 +15,10 @@ namespace Generators
         [SerializeField] private RoomEnvironmentGenerator roomEnvironmentGenerator;
         [SerializeField] private Transform roomParentTransform;
         [SerializeField] private int minBlocksCount = 600;
+        [SerializeField] private float nearCellsDistance = 1.7f;
+        [SerializeField] private int nearCellsCountRemove = 7;
+
+
         [SerializeField, ReadOnly] private List<FloorCell> floor;
         private HashSet<Vector2Int> _path;
 
@@ -23,18 +28,18 @@ namespace Generators
             Debug.Log("Room generation");
             Clear();
             GeneratePath();
-            if (_path.Count < minBlocksCount)
-            {
-                GenerateRoom();
-                return;
-            }
+            // if (_path.Count < minBlocksCount)
+            // {
+            //     GenerateRoom();
+            //     return;
+            // }
 
             FloorCell cellPrefab = settings.CellPrefab;
             foreach (var pathPos in _path)
             {
                 var cellPos = new Vector3(pathPos.x, 0, pathPos.y);
                 FloorCell cell = Instantiate(cellPrefab, cellPos, cellPrefab.transform.rotation, roomParentTransform);
-                var nearCellsCount = _path.Count(c => Vector2Int.Distance(c, pathPos) < 1.01f);
+                var nearCellsCount = _path.Count(c => Vector2Int.Distance(c, pathPos) < nearCellsDistance);
                 cell.SetNearCellsCount(nearCellsCount - 1);
                 floor.Add(cell);
             }
@@ -65,8 +70,8 @@ namespace Generators
 
             _path.RemoveWhere(p =>
             {
-                var nearCellsCount = _path.Count(c => Vector2Int.Distance(c, p) < 1.01f);
-                return nearCellsCount <= 4;
+                var nearCellsCount = _path.Count(c => Vector2Int.Distance(c, p) < nearCellsDistance);
+                return nearCellsCount <= nearCellsCountRemove;
             });
         }
 

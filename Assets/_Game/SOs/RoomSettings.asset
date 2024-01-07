@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RoomSettings
   m_EditorClassIdentifier: 
   startPos: {x: 0, y: 0}
-  iterations: 100
-  iterationWalkCount: 200
-  maxDistance: 8
+  iterations: 200
+  iterationWalkCount: 300
+  maxDistance: 6
   iterationFromRandomPos: 1
   cellPrefab: {fileID: 6002702982394233044, guid: 00e24cb7b636a1d42adec60e5560c3f2, type: 3}

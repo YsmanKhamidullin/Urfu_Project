@@ -20,7 +20,7 @@ namespace Algorithms
                 }
                 else
                 {
-                    newPos = prevPos - randomDir;
+                    newPos = startPos;
                     path.Add(newPos);
                 }
 

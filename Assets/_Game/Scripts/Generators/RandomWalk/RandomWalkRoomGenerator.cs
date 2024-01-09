@@ -3,7 +3,6 @@ using System.Linq;
 using Algorithms;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Generators
@@ -14,7 +13,7 @@ namespace Generators
         [SerializeField] private RoomSettings settings;
         [SerializeField] private RoomEnvironmentGenerator roomEnvironmentGenerator;
         [SerializeField] private Transform roomParentTransform;
-        [SerializeField] private int minBlocksCount = 600;
+        // [SerializeField] private int minBlocksCount = 600;
         [SerializeField] private float nearCellsDistance = 1.7f;
         [SerializeField] private int nearCellsCountRemove = 7;
 
